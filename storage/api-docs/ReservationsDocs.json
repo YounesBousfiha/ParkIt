@@ -1,0 +1,217 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "Reservations",
+        "contact": {}
+    },
+    "host": "127.0.0.1:8000",
+    "basePath": "/api",
+    "securityDefinitions": {},
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/reservations": {
+            "post": {
+                "summary": "CreateReservation",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "CreateReservation",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CreateReservationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "get": {
+                "summary": "GetAllReservations",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "GetAllReservations",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/reservations/1": {
+            "get": {
+                "summary": "GetOneReservation",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "GetOneReservation",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "put": {
+                "summary": "UpdateReservation",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "UpdateReservation",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateReservationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "delete": {
+                "summary": "DeleteReservation",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "DeleteReservation",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/myreservations": {
+            "get": {
+                "summary": "MyReservation",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "MyReservation",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        }
+    },
+    "definitions": {
+        "CreateReservationRequest": {
+            "title": "CreateReservationRequest",
+            "example": {
+                "start_date": "2023-03-09 23:07",
+                "end_date": "2023-03-09 23:08",
+                "parking_id": 2
+            },
+            "type": "object",
+            "properties": {
+                "start_date": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "parking_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "start_date",
+                "end_date",
+                "parking_id"
+            ]
+        },
+        "UpdateReservationRequest": {
+            "title": "UpdateReservationRequest",
+            "example": {
+                "start_date": "2023-12-01 08:30",
+                "end_date": "2023-12-01 12:45"
+            },
+            "type": "object",
+            "properties": {
+                "start_date": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "start_date",
+                "end_date"
+            ]
+        }
+    },
+    "security": [],
+    "tags": [
+        {
+            "name": "Misc",
+            "description": ""
+        }
+    ]
+}

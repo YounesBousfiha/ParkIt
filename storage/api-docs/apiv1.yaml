@@ -1,0 +1,511 @@
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "Combined API"
+  description: "API for managing parking reservations and related functionalities."
+  contact: {}
+host: "127.0.0.1:8000"
+basePath: "/api"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /reservations:
+    post:
+      summary: "Create Reservation"
+      tags:
+        - "Reservations"
+      description: "Creates a new reservation."
+      operationId: "CreateReservation"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Body"
+          in: "body"
+          required: true
+          description: "The reservation request details."
+          schema:
+            $ref: "#/definitions/CreateReservationRequest"
+      responses:
+        "201":  # Changed to 201 Created
+          description: "Reservation created successfully."
+        "400":
+          description: "Invalid request body."
+        "500":
+          description: "Internal server error."
+      security: []
+    get:
+      summary: "Get All Reservations"
+      tags:
+        - "Reservations"
+      description: "Retrieves a list of all reservations."
+      operationId: "GetAllReservations"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "A list of reservations."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  "/reservations/{reservation_id}":
+    get:
+      summary: "Get One Reservation"
+      tags:
+        - "Reservations"
+      description: "Retrieves a specific reservation by its ID."
+      operationId: "GetOneReservation"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "reservation_id"
+          in: "path"
+          required: true
+          description: "The ID of the reservation to retrieve."
+          type: "integer"
+          format: "int32"
+      responses:
+        "200":
+          description: "The requested reservation."
+        "404":
+          description: "Reservation not found."
+        "500":
+          description: "Internal server error."
+      security: []
+    put:
+      summary: "Update Reservation"
+      tags:
+        - "Reservations"
+      description: "Updates an existing reservation."
+      operationId: "UpdateReservation"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "reservation_id"
+          in: "path"
+          required: true
+          description: "The ID of the reservation to update."
+          type: "integer"
+          format: "int32"
+        - name: "Body"
+          in: "body"
+          required: true
+          description: "The updated reservation details."
+          schema:
+            $ref: "#/definitions/UpdateReservationRequest"
+      responses:
+        "200":
+          description: "Reservation updated successfully."
+        "400":
+          description: "Invalid request body."
+        "404":
+          description: "Reservation not found."
+        "500":
+          description: "Internal server error."
+      security: []
+    delete:
+      summary: "Delete Reservation"
+      tags:
+        - "Reservations"
+      description: "Deletes a specific reservation."
+      operationId: "DeleteReservation"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "reservation_id"
+          in: "path"
+          required: true
+          description: "The ID of the reservation to delete."
+          type: "integer"
+          format: "int32"
+      responses:
+        "204":  # Changed to 204 No Content
+          description: "Reservation deleted successfully (no content returned)."
+        "404":
+          description: "Reservation not found."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /myreservations:
+    get:
+      summary: "My Reservations"
+      tags:
+        - "Reservations"
+      description: "Retrieves reservations for the currently authenticated user."
+      operationId: "MyReservation"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "A list of the user's reservations."
+        "401":
+          description: "Unauthorized (authentication required)."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /parkings:
+    post:
+      summary: "Create Parking"
+      tags:
+        - "Parking"
+      description: "Creates a new parking location."
+      operationId: "CreateParking"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Body"
+          in: "body"
+          required: true
+          description: "The parking location details."
+          schema:
+            $ref: "#/definitions/CreateParkingRequest"
+      responses:
+        "201":  # Changed to 201 Created
+          description: "Parking location created successfully."
+        "400":
+          description: "Invalid request body."
+        "500":
+          description: "Internal server error."
+      security: []
+    get:
+      summary: "Get All Parkings"
+      tags:
+        - "Parking"
+      description: "Retrieves a list of all parking locations."
+      operationId: "allParking"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "A list of parking locations."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  "/parkings/{parking_id}":
+    get:
+      summary: "Get One Parking"
+      tags:
+        - "Parking"
+      description: "Retrieves a specific parking location by its ID."
+      operationId: "GetOneParking"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "parking_id"
+          in: "path"
+          required: true
+          description: "The ID of the parking location to retrieve."
+          type: "integer"
+          format: "int32"
+      responses:
+        "200":
+          description: "The requested parking location."
+        "404":
+          description: "Parking location not found."
+        "500":
+          description: "Internal server error."
+      security: []
+    put:
+      summary: "Update Parking"
+      tags:
+        - "Parking"
+      description: "Updates an existing parking location."
+      operationId: "UpdateParking"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "parking_id"
+          in: "path"
+          required: true
+          description: "The ID of the parking location to update."
+          type: "integer"
+          format: "int32"
+        - name: "Body"
+          in: "body"
+          required: true
+          description: "The updated parking location details."
+          schema:
+            $ref: "#/definitions/UpdateParkingRequest"
+      responses:
+        "200":
+          description: "Parking location updated successfully."
+        "400":
+          description: "Invalid request body."
+        "404":
+          description: "Parking location not found."
+        "500":
+          description: "Internal server error."
+      security: []
+    delete:
+      summary: "Delete Parking"
+      tags:
+        - "Parking"
+      description: "Deletes a specific parking location."
+      operationId: "DeleteParking"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "parking_id"
+          in: "path"
+          required: true
+          description: "The ID of the parking location to delete."
+          type: "integer"
+          format: "int32"
+      responses:
+        "204": # Changed to 204 No Content
+          description: "Parking location deleted successfully (no content returned)."
+        "404":
+          description: "Parking location not found."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /parkings/avalability:
+    get:
+      summary: "Parking Availability"
+      tags:
+        - "Parking"
+      description: "Checks the availability of parking spaces in a specific zone."
+      operationId: "ParkingAvalability"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "zone"
+          in: "query"
+          required: true
+          type: "string"
+          description: "The zone to check for parking availability."
+      responses:
+        "200":
+          description: "Parking availability information."
+        "400":
+          description: "Invalid zone provided."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /parkings/stats:
+    get:
+      summary: "Statistics"
+      tags:
+        - "Parking"
+      description: "Retrieves statistics related to parking usage."
+      operationId: "Statistiques"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Parking usage statistics."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /login:
+    post:
+      summary: "Login"
+      tags:
+        - "Auth"
+      description: "Authenticates a user and returns a token."
+      operationId: "Login"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Body"
+          in: "body"
+          required: true
+          description: "The user's login credentials."
+          schema:
+            $ref: "#/definitions/LoginRequest"
+      responses:
+        "200":
+          description: "Authentication successful, returns a token."
+        "400":
+          description: "Invalid credentials."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /register:
+    post:
+      summary: "Register"
+      tags:
+        - "Auth"
+      description: "Registers a new user."
+      operationId: "register"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Body"
+          in: "body"
+          required: true
+          description: "The user's registration information."
+          schema:
+            $ref: "#/definitions/RegisterRequest" # Corrected reference
+      responses:
+        "201":  # Changed to 201 Created
+          description: "User registered successfully."
+        "400":
+          description: "Invalid registration data."
+        "500":
+          description: "Internal server error."
+      security: []
+
+  /logout:
+    post:
+      summary: "Logout"
+      tags:
+        - "Auth"
+      description: "Invalidates the user's authentication token."
+      operationId: "logout"
+      parameters: []
+      responses:
+        "204":  # Changed to 204 No Content
+          description: "Logout successful (no content returned)."
+        "401":
+          description: "Unauthorized (authentication required)."
+        "500":
+          description: "Internal server error."
+      security: []
+
+definitions:
+  CreateReservationRequest:
+    title: "CreateReservationRequest"
+    description: "Request body for creating a new reservation."
+    type: "object"
+    properties:
+      start_date:
+        type: "string"
+        format: "date-time"
+        description: "The start date and time of the reservation (ISO 8601 format, e.g., 2023-12-02T10:00:00Z)."
+        example: "2023-12-02T10:00:00Z"
+      end_date:
+        type: "string"
+        format: "date-time"
+        description: "The end date and time of the reservation (ISO 8601 format, e.g., 2023-12-02T11:00:00Z)."
+        example: "2023-12-02T11:00:00Z"
+      parking_id:
+        type: "integer"
+        format: "int32"
+        description: "The ID of the parking location for the reservation."
+        example: 2
+    required:
+      - "start_date"
+      - "end_date"
+      - "parking_id"
+
+  UpdateReservationRequest:
+    title: "UpdateReservationRequest"
+    description: "Request body for updating an existing reservation."
+    type: "object"
+    properties:
+      start_date:
+        type: "string"
+        format: "date-time"
+        description: "The new start date and time (ISO 8601 format)."
+        example: "2023-12-03T09:00:00Z"
+      end_date:
+        type: "string"
+        format: "date-time"
+        description: "The new end date and time (ISO 8601 format)."
+        example: "2023-12-03T10:00:00Z"
+    required:
+      - "start_date"
+      - "end_date"
+
+  CreateParkingRequest:
+    title: "CreateParkingRequest"
+    description: "Request body for creating a new parking location."
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the parking location."
+        example: "City Center Garage"
+      location:
+        type: "string"
+        description: "The physical location of the parking (e.g., address)."
+        example: "123 Main Street"
+      total_places:
+        type: "integer"
+        format: "int32"
+        description: "The total number of parking spaces available."
+        example: 100
+    required:
+      - "name"
+      - "location"
+      - "total_places"
+
+  UpdateParkingRequest:
+    title: "UpdateParkingRequest"
+    description: "Request body for updating an existing parking location."
+    type: "object"
+    properties:
+      total_places:
+        type: "integer"
+        format: "int32"
+        description: "The updated total number of parking spaces."
+        example: 120
+    required:
+      - "total_places"
+
+  LoginRequest:
+    title: "LoginRequest"
+    description: "Request body for user login."
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+        description: "The user's email address."
+        example: "user@example.com"
+      password:
+        type: "string"
+        description: "The user's password."
+        example: "password123"
+    required:
+      - "email"
+      - "password"
+
+  RegisterRequest:  # Corrected name
+    title: "RegisterRequest"
+    description: "Request body for user registration."
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The user's full name."
+        example: "John Doe"
+      email:
+        type: "string"
+        format: "email"
+        description: "The user's email address."
+        example: "john.doe@example.com"
+      password:
+        type: "string"
+        description: "The user's password."
+        example: "password123"
+    required:
+      - "name"
+      - "email"
+      - "password"
+
+securityDefinitions: {}
+security: []
+tags:
+  - name: "Reservations"
+    description: "Operations related to parking reservations."
+  - name: "Parking"
+    description: "Operations related to parking locations."
+  - name: "Auth"
+    description: "Operations related to user authentication and authorization."

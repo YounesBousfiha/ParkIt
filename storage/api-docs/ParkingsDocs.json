@@ -1,0 +1,244 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "Parking",
+        "contact": {}
+    },
+    "host": "127.0.0.1:8000",
+    "basePath": "/api",
+    "securityDefinitions": {},
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/parkings": {
+            "post": {
+                "summary": "CreateParking",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "CreateParking",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CreateParkingRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "get": {
+                "summary": "allParking",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "allParking",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/parkings/2": {
+            "get": {
+                "summary": "GetOneParking",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "GetOneParking",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "put": {
+                "summary": "UpdateParking",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "UpdateParking",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateParkingRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/parkings/3": {
+            "delete": {
+                "summary": "DeleteParking",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "DeleteParking",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/parkings/avalability": {
+            "get": {
+                "summary": "ParkingAvalability",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "ParkingAvalability",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "zone",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/parkings/stats": {
+            "get": {
+                "summary": "Statistiques",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "Statistiques",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        }
+    },
+    "definitions": {
+        "CreateParkingRequest": {
+            "title": "CreateParkingRequest",
+            "example": {
+                "name": "Eljadida Parking",
+                "location": "ElJadida",
+                "total_places": 25
+            },
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "total_places": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "name",
+                "location",
+                "total_places"
+            ]
+        },
+        "UpdateParkingRequest": {
+            "title": "UpdateParkingRequest",
+            "example": {
+                "total_places": 12
+            },
+            "type": "object",
+            "properties": {
+                "total_places": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "total_places"
+            ]
+        }
+    },
+    "security": [],
+    "tags": [
+        {
+            "name": "Misc",
+            "description": ""
+        }
+    ]
+}
