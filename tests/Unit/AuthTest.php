@@ -42,6 +42,14 @@ class AuthTest extends TestCase
             ->with('auth_token')
             ->andReturn(Mockery::mock(['plainTextToken' => 'token']));
 
+        // Mock the where method
+        $mockedUser->shouldReceive('where')
+            ->andReturnSelf();
+
+        // Mock the exists method
+        $mockedUser->shouldReceive('exists')
+            ->andReturn(false);
+
         // Mock the Hash facade to return a fake hashed password
         Hash::shouldReceive('make')
             ->once()

@@ -100,7 +100,6 @@ class PakignsTest extends TestCase
         ]);
     }
 
-    // TODO: Handle Issue Where the admin can't remove the reserved parkings
     public function test_supprimer_parking_with_reservations() {
         $headers = $this->login();
 

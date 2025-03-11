@@ -74,6 +74,12 @@ class ReservationsController extends Controller
             ], 404);
         }
 
+        if($reservation['user_id'] != Auth::id()) {
+            return response()->json([
+                'message' => 'you don\'t have permission'
+            ], 401);
+        }
+
         if($reservation['status'] != 'Done' || $reservation['status'] != 'Canceled') {
             $reservation['start_date'] = $request->start_date;
             $reservation['end_date'] = $request->end_date;
@@ -96,6 +102,12 @@ class ReservationsController extends Controller
             return response()->json([
                 'message' => 'Not Found',
             ], 404);
+        }
+
+        if($reservation['user_id'] != Auth::id()) {
+            return response()->json([
+                'message' => 'you don\'t have permission'
+            ], 401);
         }
 
         $reservation['status'] = 'canceled';
