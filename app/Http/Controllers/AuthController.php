@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginValidation;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use Exception;
 use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,11 @@ class AuthController extends Controller
 {
     public function register (StoreUserRequest $request) {
 
+        if(User::where('email', $request->email)->exists()) {
+            return response()->json([
+                'message' => 'User Already Exists'
+            ], 400);
+        }
         $user = User::create([
            'name' => $request->name,
            'email' => $request->email,
