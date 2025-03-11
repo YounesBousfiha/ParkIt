@@ -82,6 +82,15 @@ class ParkingController extends Controller
             ], 404);
         }
 
+        $reservations = Reservations::with('parking')->where('parking_id', $id)->get();
+        foreach ($reservations as $reservation) {
+            if($reservation['status'] == 'reserved' || $reservation['status'] == 'inThePark') {
+                return response()->json([
+                    'message' => 'the park has some reservations at the moments'
+                ], 400);
+            }
+        }
+
         $park->delete();
 
         return response()->json([
