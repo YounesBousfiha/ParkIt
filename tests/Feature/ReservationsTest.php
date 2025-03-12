@@ -138,13 +138,13 @@ class ReservationsTest extends TestCase
         $reservationsRes = $this->withHeaders($headers)->getJson('api/reservations');
         $reservations = json_decode($reservationsRes->getContent(), true);
 
-        dd($reservations[0]);
+        $id = $reservations['reservations'][0]['id'];
 
-        $response = $this->withHeaders($headers)->getJson('api/reservations');
+        $response = $this->withHeaders($headers)->getJson("api/reservations/$id");
 
         $response->assertStatus(200)
             ->assertJson([
-                'reservations' => true
+                'reservation' => true
             ]);
     }
 }
